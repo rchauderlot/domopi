@@ -1,0 +1,43 @@
+#docker compose for installing duplicati, home assistant mosquito, nginx-proxy-manager, zigbee2mqtt?
+version: '3.7'
+
+services:
+  duplicati:
+    image: duplicati/duplicati:latest
+    container_name: duplicati
+    volumes:
+      - /data/duplicati:/data
+    ports:
+      - 8200:8200
+    restart: always
+  homeassistant:
+    image: homeassistant/home-assistant:latest
+    container_name: homeassistant
+    volumes:
+      - /data/homeassistant:/config
+    ports:
+      - 8123:8123
+    restart: always
+  mosquito:
+    image: eclipse-mosquitto:latest
+    container_name: mosquito
+    ports:
+      - 1883:1883
+    restart: always
+  nginx-proxy-manager:
+    image: nginxproxymanager/nginx-proxy-manager:latest
+    container_name: nginx-proxy-manager
+    volumes:
+      - /data/nginx-proxy-manager:/data
+    ports:
+      - 80:80
+      - 443:443
+    restart: always
+  zigbee2mqtt:
+    image: zigbee2mqtt/zigbee2mqtt:latest
+    container_name: zigbee2mqtt
+    volumes:
+      - /data/zigbee2mqtt:/data
+    ports:
+      - 1883:1883
+    restart: always
