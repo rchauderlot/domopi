@@ -8,6 +8,9 @@ sudo apt-get autoclean
 sudo apt-get -y install docker
 sudo apt-get -y install docker-compose
 
+# docker start daemon
+sudo systemctl restart docker
+
 # install all the docker images
 curl -fsSL https://raw.githubusercontent.com/rchauderlot/domopi/master/docker-compose.yml | docker-compose -f /dev/stdin up  | 
 
