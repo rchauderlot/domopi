@@ -5,16 +5,11 @@ sudo apt-get -y update
 sudo apt-get -y dist-upgrade
 sudo apt-get -y autoremove
 sudo apt-get autoclean
-sudo apt-get install docker
-sudo apt-get install docker-compose
+sudo apt-get -y install docker
+sudo apt-get -y install docker-compose
 
-mkdir .domopi_docker_tmp
-cd .domopi_docker_tmp
-curl -fsSL https://raw.githubusercontent.com/rchauderlot/domopi/master/docker-compose.yml
-#docker-compose up -d
-cd ..
-# rm -rf .domopi_docker_tmp
-
+# install all the docker images
+curl -fsSL https://raw.githubusercontent.com/rchauderlot/domopi/master/docker-compose.yml | docker-compose -f /dev/stdin up  | 
 
 # Install a set of a docker containers from a docker-compose.yml stored in a github repository?
 # install 3G dongle?
@@ -37,6 +32,15 @@ cd ..
 # access point enable?
 
 
-# iptables install and config
+# iptables install and config to open 28357 port?
+# Install iptables
+#sudo apt-get install iptables
 
+# Create a new rule to allow traffic on port 28357
+#sudo iptables -A INPUT -p tcp --dport 28357 -j ACCEPT
+
+# Save the iptables rules
+#sudo iptables-save
+
+echo
 echo "Please, reboot and restore duplicati backup if any"
