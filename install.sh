@@ -12,7 +12,7 @@ sudo apt-get -y install docker-compose
 sudo systemctl restart docker
 
 # install all the docker images
-curl -fsSL https://raw.githubusercontent.com/rchauderlot/domopi/master/docker-compose.yml | docker-compose -f /dev/stdin up  | 
+curl -fsSL https://raw.githubusercontent.com/rchauderlot/domopi/master/docker-compose.yml | sudo docker-compose -f /dev/stdin up  | 
 
 # Install a set of a docker containers from a docker-compose.yml stored in a github repository?
 # install 3G dongle?
