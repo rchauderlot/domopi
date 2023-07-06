@@ -28,44 +28,46 @@ services:
       - 1883:1883
       - 9001:9001
     restart: unless-stopped
-  nginx-proxy-manager:
-    image: nginxproxymanager/nginx-proxy-manager:latest
+  nginx-proxy-manager:    
+    image: 'jc21/nginx-proxy-manager:latest'
     container_name: nginx-proxy-manager
     volumes:
       - /data/synchronized/nginx-proxy-manager/data:/data
+      - /data/synchronized/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
     ports:
       - 80:80
+      - '81:81'
       - 23774:443
     restart: unless-stopped
-  zigbee2mqtt:
-    image: koenkk/zigbee2mqtt:latest
-    container_name: zigbee2mqtt
-    devices:
-        - '/dev/serial/by-id/usb-Texas_Instruments_TI_CC2531_USB_CDC___0X00124B0018ED3DDF-if00:/dev/ttyACM0'
-    ports:
-        - '8080:8080'
-    volumes:
-        - '/data/synchronized/zigbee2mqtt/data:/app/data'
-        - '/run/udev:/run/udev:ro'
-    environment:
-        - TZ=Europe/Madrid
-    restart: unless-stopped
-  wireguard:
-    image: linuxserver/wireguard:latest
-    container_name: wireguard
-    environment:
-      - TZ=Europe/Madrid
-      - SERVERURL=wireguard.domain.com
-      - SERVERPORT=51820
-      - PEERS=1
-      - PEERDNS=auto
-      - INTERNAL_SUBNET=10.13.13.0
-      - ALLOWEDIPS=0.0.0.0/0
-      - PERSISTENTKEEPALIVE_PEERS=
-      - LOG_CONFS=true
-    ports:
-      - '23771:51820/udp'
-    volumes:
-      - '/data/synchronized/wireward/config:/config'
-      - '/lib/modules:/lib/modules'
-    restart: unless-stopped
+#  zigbee2mqtt:
+#    image: koenkk/zigbee2mqtt:latest
+#    container_name: zigbee2mqtt
+#    devices:
+#        - '/dev/serial/by-id/usb-Texas_Instruments_TI_CC2531_USB_CDC___0X00124B0018ED3DDF-if00:/dev/ttyACM0'
+#    ports:
+#        - '8080:8080'
+#    volumes:
+#        - '/data/synchronized/zigbee2mqtt/data:/app/data'
+#        - '/run/udev:/run/udev:ro'
+#    environment:
+#        - TZ=Europe/Madrid
+#    restart: unless-stopped
+#  wireguard:
+#    image: linuxserver/wireguard:latest
+#    container_name: wireguard
+#    environment:
+#      - TZ=Europe/Madrid
+#      - SERVERURL=wireguard.domain.com
+#      - SERVERPORT=51820
+#      - PEERS=1
+#      - PEERDNS=auto
+#      - INTERNAL_SUBNET=10.13.13.0
+#      - ALLOWEDIPS=0.0.0.0/0
+#      - PERSISTENTKEEPALIVE_PEERS=
+#      - LOG_CONFS=true
+#    ports:
+#      - '23771:51820/udp'
+#    volumes:
+#      - '/data/synchronized/wireward/config:/config'
+#      - '/lib/modules:/lib/modules'
+#    restart: unless-stopped
